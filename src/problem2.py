@@ -3,8 +3,8 @@ PRACTICE Exam 1, problem 2.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Valerie Galluzzi, Mark Hays, Amanda Stouder, Aaron Wilkin,
-         their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues, and Zhicheng Kai.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -102,8 +102,38 @@ def problem2a(circle, rectangle, window):
       :type rectangle: rg.Rectangle
       :type window:    rg.RoseWindow
     """
+    circle.attach_to(window)
+    rectangle.attach_to(window)
+    if rectangle.corner_1.x > rectangle.corner_2.x:
+        if rectangle.corner_1.y < rectangle.corner_2.y:
+            line = rg.Line(rectangle.corner_1, rectangle.corner_2)
+            line.arrow = "last"
+            line.color = rectangle.outline_color
+            line.attach_to(window)
+        else:
+            line2 = rg.Line(rg.Point(rectangle.corner_1.x,rectangle.corner_2.y),rg.Point(rectangle.corner_2.x,rectangle.corner_1.y))
+            line2.arrow = "last"
+            line2.color = rectangle.outline_color
+            line2.attach_to(window)
+    elif rectangle.corner_1.x < rectangle.corner_2.x:
+        if rectangle.corner_1.y > rectangle.corner_2.y:
+            line3 = rg.Line(rectangle.corner_2, rectangle.corner_1)
+            line3.arrow = "last"
+            line3.color = rectangle.outline_color
+            line3.attach_to(window)
+        else:
+            line4 = rg.Line(rg.Point(rectangle.corner_2.x, rectangle.corner_1.y),
+                            rg.Point(rectangle.corner_1.x, rectangle.corner_2.y))
+            line4.arrow = "last"
+            line4.color = rectangle.outline_color
+            line4.attach_to(window)
+    else:
+        print('false')
+
+
+    window.render()
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     # -------------------------------------------------------------------------
     # -------------------------------------------------------------------------
@@ -173,8 +203,42 @@ def problem2b(rect, n, delta, win):
       :type delta:  int
       :type win:    rg.RoseWindow
     """
+    rect.attach_to(win)
+    for k in range(n):
+        if rect.corner_1.x > rect.corner_2.x and rect.corner_1.y > rect.corner_2.y:
+            x1 = rect.corner_1.x+(k+1)*delta
+            y1 = rect.corner_1.y+(k+1)*delta
+            x2 = rect.corner_2.x-(k+1)*delta
+            y2 = rect.corner_2.y-(k+1)*delta
+            rect1 = rg.Rectangle(rg.Point(x1,y1),rg.Point(x2,y2))
+            rect1.attach_to(win)
+        if rect.corner_1.x > rect.corner_2.x and rect.corner_1.y < rect.corner_2.y:
+            x1 = rect.corner_1.x+(k+1)*delta
+            y1 = rect.corner_1.y-(k+1)*delta
+            x2 = rect.corner_2.x-(k+1)*delta
+            y2 = rect.corner_2.y+(k+1)*delta
+            rect2 = rg.Rectangle(rg.Point(x1,y1),rg.Point(x2,y2))
+            rect2.attach_to(win)
+        if rect.corner_1.x < rect.corner_2.x and rect.corner_1.y > rect.corner_2.y:
+            x1 = rect.corner_1.x-(k+1)*delta
+            y1 = rect.corner_1.y+(k+1)*delta
+            x2 = rect.corner_2.x+(k+1)*delta
+            y2 = rect.corner_2.y-(k+1)*delta
+            rect3 = rg.Rectangle(rg.Point(x1,y1),rg.Point(x2,y2))
+            rect3.attach_to(win)
+        if rect.corner_1.x < rect.corner_2.x and rect.corner_1.y < rect.corner_2.y:
+            x1 = rect.corner_1.x-(k+1)*delta
+            y1 = rect.corner_1.y-(k+1)*delta
+            x2 = rect.corner_2.x+(k+1)*delta
+            y2 = rect.corner_2.y+(k+1)*delta
+            rect1 = rg.Rectangle(rg.Point(x1,y1),rg.Point(x2,y2))
+            rect1.attach_to(win)
+    win.render()
+
+
+
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Tests have been written for you (above).
     # -------------------------------------------------------------------------
     # -------------------------------------------------------------------------
